@@ -116,6 +116,7 @@
               <th>Keuze</th>
               <th>Inzet</th>
               <th>Datum en Tijd</th>
+              <th>Betaald</th>
             </tr>
           </thead>
           <tbody>
@@ -126,6 +127,7 @@
               <td>{{ row.choice }}</td>
               <td>€{{ row.bet }}</td>
               <td>{{ row.date }}</td>
+              <td>{{ "Ja" if row.payed else "Nee" }}</td>
             </tr>
             {% endfor %}
           </tbody>

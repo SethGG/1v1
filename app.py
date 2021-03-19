@@ -45,6 +45,7 @@ class Bet(db.Model):
     choice = db.Column(db.String, nullable=False)
     bet = db.Column(db.Float, nullable=False)
     date = db.Column(db.DateTime, nullable=False)
+    payed = db.Column(db.Boolean, default=False)
 
 
 if __name__ == '__main__':
