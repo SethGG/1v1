@@ -38,7 +38,7 @@
         <div class="column is-3 has-text-centered">
           <div>
             <p class="heading">Winst per euro Ayla</p>
-            <p class="title is-1">€{{ total_joyce/total_ayla }}</p>
+            <p class="title is-1">€{{ total_joyce/total_ayla if total_ayla else total_joyce }}</p>
           </div>
         </div>
         <div class="column is-6 has-text-centered">
@@ -50,7 +50,7 @@
         <div class="column is-3 has-text-centered">
           <div>
             <p class="heading">Winst per euro Joyce</p>
-            <p class="title is-1">€{{ total_ayla/total_joyce }}</p>
+            <p class="title is-1">€{{ total_ayla/total_joyce if total_joyce else total_ayla }}</p>
           </div>
         </div>
       </div>
