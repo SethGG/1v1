@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="endtime" content="{{ endtime }}">
+  <title>Hello Bulma!</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+
+<body>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns">
+        <div class="column is-4 has-text-centered">
+          <div>
+            <p class="heading">Inleg Ayla</p>
+            {% set total_ayla = rows|selectattr('choice', 'equalto', 'Ayla')|sum(attribute='bet') %}
+            <p class="title is-1">€{{ total_ayla }}</p>
+          </div>
+        </div>
+        <div class="column is-4 has-text-centered">
+          <div>
+            <p class="heading">Totale Inleg</p>
+            <p class="title is-1">€{{ rows|sum(attribute='bet') }}</p>
+          </div>
+        </div>
+        <div class="column is-4 has-text-centered">
+          <div>
+            <p class="heading">Inleg Joyce</p>
+            {% set total_joyce = rows|selectattr('choice', 'equalto', 'Joyce')|sum(attribute='bet') %}
+            <p class="title is-1">€{{ total_joyce }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-4 has-text-centered">
+          <div>
+            <p class="heading">Winst per euro Ayla</p>
+            <p class="title is-1">€{{ total_joyce/total_ayla }}</p>
+          </div>
+        </div>
+        <div class="column is-4 has-text-centered">
+          <div>
+            <p class="heading">Countdown</p>
+            <p class="title is-1" id="countdown"></p>
+          </div>
+        </div>
+        <div class="column is-4 has-text-centered">
+          <div>
+            <p class="heading">Winst per euro Joyce</p>
+            <p class="title is-1">€{{ total_ayla/total_joyce }}</p>
+          </div>
+        </div>
+      </div>
+      <form class="box" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.name.label(class_="label") }}
+        <div class="field control">
+          {{ form.name(class_="input") }}
+        </div>
+        {{ form.choice.label(class_="label") }}
+        <div class="field control">
+          {% for subfield in form.choice %}
+          <div class="radio">
+            {{ subfield }}
+            {{ subfield.label }}
+          </div>
+          {% endfor %}
+        </div>
+        {{ form.bet.label(class_="label") }}
+        <div class="field has-addons">
+          <div class="control">
+            <span class="button is-static">€</span>
+          </div>
+          <div class="control is-expanded">
+            {{ form.bet(class_="input") }}
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            {{ form.submit(class_="button is-primary") }}
+          </div>
+        </div>
+      </form>
+      <div class="box">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>Nummer</th>
+              <th>Naam</th>
+              <th>Keuze</th>
+              <th>Inzet</th>
+              <th>Datum en Tijd</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in rows %}
+            <tr>
+              <th>{{ row.id }}</th>
+              <td>{{ row.name }}</td>
+              <td>{{ row.choice }}</td>
+              <td>€{{ row.bet }}</td>
+              <td>{{ row.date }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <script>
+    // Set the date we're counting down to
+    var endtime = document.querySelector('meta[name="endtime"]').content;
+    var countDownDate = new Date(endtime).getTime();
+
+    function countdown() {
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Output the result in an element with id="demo"
+      document.getElementById("countdown").innerHTML = days + "d " + hours + "h " +
+        minutes + "m " + seconds + "s ";
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "LETS GO!!!";
+      }
+    }
+
+    // Update the count down every 1 second
+    countdown();
+    var x = setInterval(countdown, 1000);
+  </script>
+</body>
+
+</html>
