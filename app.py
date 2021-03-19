@@ -7,8 +7,8 @@ from datetime import datetime
 
 
 class Config():
-    SECRET_KEY = 'n983U#!*TPiu'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///bets.db'
+    SECRET_KEY = 'hertogstam'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///db/bets.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
@@ -22,7 +22,8 @@ endtime = datetime(2021, 3, 26, 23)
 def root():
     form = BetForm()
     if form.validate_on_submit() and datetime.now() < endtime:
-        bet = Bet(name=form.name.data, choice=form.choice.data, bet=form.bet.data)
+        bet = Bet(name=form.name.data, choice=form.choice.data,
+                  bet=form.bet.data, date=datetime.now().replace(microsecond=0))
         db.session.add(bet)
         db.session.commit()
         return redirect(url_for('root'))
@@ -43,7 +44,7 @@ class Bet(db.Model):
     name = db.Column(db.String, nullable=False)
     choice = db.Column(db.String, nullable=False)
     bet = db.Column(db.Float, nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.now().replace(microsecond=0))
+    date = db.Column(db.DateTime, nullable=False)
 
 
 if __name__ == '__main__':
