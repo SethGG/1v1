@@ -13,20 +13,20 @@
   <section class="section">
     <div class="container is-max-desktop">
       <div class="columns">
-        <div class="column is-4 has-text-centered">
+        <div class="column is-3 has-text-centered">
           <div>
             <p class="heading">Inleg Ayla</p>
             {% set total_ayla = rows|selectattr('choice', 'equalto', 'Ayla')|sum(attribute='bet') %}
             <p class="title is-1">€{{ total_ayla }}</p>
           </div>
         </div>
-        <div class="column is-4 has-text-centered">
+        <div class="column is-6 has-text-centered">
           <div>
             <p class="heading">Totale Inleg</p>
             <p class="title is-1">€{{ rows|sum(attribute='bet') }}</p>
           </div>
         </div>
-        <div class="column is-4 has-text-centered">
+        <div class="column is-3 has-text-centered">
           <div>
             <p class="heading">Inleg Joyce</p>
             {% set total_joyce = rows|selectattr('choice', 'equalto', 'Joyce')|sum(attribute='bet') %}
@@ -35,24 +35,44 @@
         </div>
       </div>
       <div class="columns">
-        <div class="column is-4 has-text-centered">
+        <div class="column is-3 has-text-centered">
           <div>
             <p class="heading">Winst per euro Ayla</p>
             <p class="title is-1">€{{ total_joyce/total_ayla }}</p>
           </div>
         </div>
-        <div class="column is-4 has-text-centered">
+        <div class="column is-6 has-text-centered">
           <div>
             <p class="heading">Countdown</p>
             <p class="title is-1" id="countdown"></p>
           </div>
         </div>
-        <div class="column is-4 has-text-centered">
+        <div class="column is-3 has-text-centered">
           <div>
             <p class="heading">Winst per euro Joyce</p>
             <p class="title is-1">€{{ total_ayla/total_joyce }}</p>
           </div>
         </div>
+      </div>
+      <div class="box">
+        <p class="label">Wat is de 1v1?</p>
+        <p class="block">
+          De epic Age of Empires 2 battle tussen Ayla (himalayla) en Joyce (Enjoyce_).
+          Na de stamopkomst vechten deze aartsrivalen het uit in een bloederige BO3 (best of 3) gevecht waar er maar één uit kan komen als de winnaar.
+          Zal Ayla zegen vieren? Of slaat Joyce haar hard naar de grond?
+        </p>
+        <p class="label">Wanneer is de 1v1?</p>
+        <p class="block">
+          Op 26 maart na de stamopkomst.
+        </p>
+        <p class="label">Waar is de 1v1?</p>
+        <p class="block">
+          Dit is allemaal te zien op <a href="https://www.twitch.tv/catsevilclone">twitch.tv/catsevilclone</a>.
+        </p>
+        <p class="label">Waarom is de 1v1?</p>
+        <p class="block">
+          Leek Luuk leuk.
+        </p>
       </div>
       <form class="box" method="post">
         {{ form.hidden_tag() }}
